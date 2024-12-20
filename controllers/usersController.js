@@ -94,3 +94,10 @@ exports.usersDeletePost = (req, res) => {
   usersStorage.deleteUser(req.params.id);
   res.redirect("/");
 };
+
+// bug: running on Get without a search, first page load
+exports.usersSearchGet = (req, res) => {
+  const { search } = req.query;
+  const matches = usersStorage.searchUsers(search);
+  res.render("search", { matches: matches });
+};

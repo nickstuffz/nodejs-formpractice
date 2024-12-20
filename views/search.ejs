@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <a href="/">Back to home</a>
+    <form action="/search" method="GET">
+      <label for="Search">Search: </label>
+      <input type="text" name="search" id="search" required />
+
+      <button type="submit">Submit</button>
+    </form>
+    <ul>
+      <% if (locals.matches) {%> <% matches.forEach(function(match) { %>
+      <li>
+        ID: <%= match.id %>, Name: <%= match.firstName %> <%= match.lastName %>,
+        Email: <%= match.email %>, Age: <%= match.age %>, Bio: <%= match.bio %>
+      </li>
+
+      <% }); %> <% } %>
+    </ul>
+    <%- include("partials/errors.ejs") %>
+  </body>
+</html>
