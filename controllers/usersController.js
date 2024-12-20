@@ -98,6 +98,11 @@ exports.usersDeletePost = (req, res) => {
 // bug: running on Get without a search, first page load
 exports.usersSearchGet = (req, res) => {
   const { search } = req.query;
-  const matches = usersStorage.searchUsers(search);
-  res.render("search", { matches: matches });
+  if (!search) {
+    res.render("search", { matches: usersStorage.getUsers() });
+    return;
+  } else {
+    const matches = usersStorage.searchUsers(search);
+    res.render("search", { matches: matches });
+  }
 };
